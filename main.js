@@ -1,5 +1,20 @@
 console.log('Hello World');
 
-const serverUrl = "https://q47kygqhwxwc.usemoralis.com:2053/server";
-const appId = "TQhmDei5euu6lC8C9EeWx5jwOiIXiebqvogGVsTx";
-Moralis.start({ serverUrl, appId });
+window.onload = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    }
+}
+
+Moralis.initialize("4wJdPBQECgvFpJPRAXagDgaQRTY6QDDHPrwSAgLj");
+Moralis.serverURL = "https://ilzyoyhgikbf.usemoralis.com:2053/server";
+
+login = async () => {
+    await Moralis.Web3.authenticate().then(function (user) {
+        console.log('Logged In');
+        console.log(Moralis.User.current());
+    })
+}
+
+document.getElementById('btn-login').onclick = login;
