@@ -11,9 +11,13 @@ Moralis.initialize("4wJdPBQECgvFpJPRAXagDgaQRTY6QDDHPrwSAgLj");
 Moralis.serverURL = "https://ilzyoyhgikbf.usemoralis.com:2053/server";
 
 login = async () => {
-    await Moralis.Web3.authenticate().then(function (user) {
+    await Moralis.Web3.authenticate().then(async function (user) {
         console.log('Logged In');
-        console.log(Moralis.User.current());
+        user.set("name", document.getElementById('user-username').value);
+        user.set("email", document.getElementById('user-email').value);
+        await user.save();
+        window.location.href = "dashboard.html";
+        
     })
 }
 
